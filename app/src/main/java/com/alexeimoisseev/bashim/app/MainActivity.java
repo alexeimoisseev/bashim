@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
@@ -22,6 +23,8 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        ((BashImApplication) getApplication()).getTracker(BashImApplication.TrackerName.APP_TRACKER);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         adapter = new QuotesArrayAdapter(this);
@@ -56,9 +59,17 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
-
     }
 
+    @Override
+    protected void onStart() {
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
+    }
+
+    @Override
+    protected void onStop() {
+        GoogleAnalytics.getInstance(this).reportActivityStop(this);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
