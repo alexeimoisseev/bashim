@@ -90,6 +90,7 @@ public class MainActivity extends ActionBarActivity {
                     Toast.makeText(getBaseContext(), error.toString(), Toast.LENGTH_SHORT).show();
                 }
                 lv.onRefreshComplete();
+                findViewById(R.id.progress).setVisibility(View.GONE);
             }
         });
         fetcher.execute();
