@@ -75,9 +75,19 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
         if (id == R.id.action_about) {
             Intent about = new Intent(this, AboutActivity.class);
-            startActivity(about);
+            startActivityForResult(about, 1);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.i("Result is", String.valueOf(resultCode));
+        if (resultCode == 1) {
+            adapter.reload();
+
+        }
     }
 
     public void load(final PullToRefreshListView lv) {

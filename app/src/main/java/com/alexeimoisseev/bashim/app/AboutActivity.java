@@ -37,5 +37,6 @@ public class AboutActivity extends ActionBarActivity {
     public void clearDb(View view) {
         QuotesDbHelper hlp = new QuotesDbHelper(this);
         hlp.clearQuotesTable();
+        setResult(1);
     }
 }
