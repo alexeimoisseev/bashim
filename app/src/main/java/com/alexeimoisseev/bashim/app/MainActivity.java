@@ -12,7 +12,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Logger;
+import com.google.android.gms.analytics.Tracker;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
@@ -24,11 +26,14 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         GoogleAnalytics.getInstance(this).getLogger()
                 .setLogLevel(Logger.LogLevel.VERBOSE);
-        ((BashImApplication) getApplication()).getTracker(BashImApplication.TrackerName.APP_TRACKER);
-        super.onCreate(savedInstanceState);
+        Tracker t = ((BashImApplication) getApplication()).getTracker(BashImApplication.TrackerName.APP_TRACKER);
+        t.setScreenName("main window");
+        t.send(new HitBuilders.AppViewBuilder().build());
+
         setContentView(R.layout.activity_main);
         adapter = new QuotesArrayAdapter(this);
         if(adapter.getCount() > 0) {
