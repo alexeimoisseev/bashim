@@ -23,6 +23,7 @@ public class BashImApplication extends Application {
         if(!mTrackers.containsKey(name)) {
             GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
             Tracker t = analytics.newTracker(PROPERTY_ID);
+            mTrackers.put(TrackerName.APP_TRACKER, t);
         }
         return mTrackers.get(name);
     }
