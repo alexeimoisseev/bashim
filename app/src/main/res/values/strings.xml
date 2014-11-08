@@ -11,7 +11,7 @@
     <string name="acton_clean_cache">Очистить кеш</string>
     <string name="quote">Цитата #</string>
     <string name="title_activity_quote">Цитата</string>
-    <string name="share_twitter">Поделиться в Твиттер</string>
+    <string name="share">Поделиться</string>
     <string name="author">Автор: Алексей Моисеев</string>
     <string name="version">Версия: 0.0.1 от 5 ноября 2014 года</string>
     <string name="link_to_club"><a href="https://vk.com/bashorgruclub">vk.com/bashorgruclub</a></string>

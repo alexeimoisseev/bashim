@@ -17,27 +17,11 @@
         android:textSize="14dp"
         android:layout_weight="10"
             />
-    <LinearLayout
+    <Button
+            android:layout_width="fill_parent"
             android:layout_height="10dp"
             android:layout_weight="1"
-            android:layout_width="fill_parent"
-            android:gravity="bottom"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="shareOnTwitter"
-            >
-
-        <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/twitter"/>
-        <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:text="@string/share_twitter"
-                android:gravity="center|left"/>
-
-    </LinearLayout>
+            android:onClick="share"
+            android:text="@string/share"
+            />
 </LinearLayout>

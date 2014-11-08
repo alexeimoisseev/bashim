@@ -6,7 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import com.alexeimoisseev.bashim.app.share.TwitterShare;
+import com.alexeimoisseev.bashim.app.share.Share;
 
 
 public class QuoteActivity extends ActionBarActivity {
@@ -39,9 +39,9 @@ public class QuoteActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void shareOnTwitter(View view) {
+    public void share(View view) {
         String text = getIntent().getStringExtra("QUOTE");
         String link = getIntent().getStringExtra("LINK");
-        new TwitterShare().share(this, text, link);
+        new Share().share(this, text, link);
     }
 }
