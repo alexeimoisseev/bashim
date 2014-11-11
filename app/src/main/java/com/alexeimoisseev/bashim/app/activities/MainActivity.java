@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.alexeimoisseev.bashim.app.*;
+import com.alexeimoisseev.bashim.app.beans.PostBean;
 import com.alexeimoisseev.bashim.app.db.QuotesDbHelper;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;

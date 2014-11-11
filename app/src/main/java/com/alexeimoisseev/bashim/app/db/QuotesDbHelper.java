@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import com.alexeimoisseev.bashim.app.PostBean;
+import com.alexeimoisseev.bashim.app.beans.PostBean;
 
 import java.util.ArrayList;
 import java.util.List;

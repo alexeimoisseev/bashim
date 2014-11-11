@@ -1,4 +1,4 @@
-package com.alexeimoisseev.bashim.app;
+package com.alexeimoisseev.bashim.app.beans;
 
 /**
  * Created by amois on 04.11.14.

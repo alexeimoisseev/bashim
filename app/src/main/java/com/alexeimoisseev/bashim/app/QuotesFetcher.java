@@ -3,6 +3,7 @@ package com.alexeimoisseev.bashim.app;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import com.alexeimoisseev.bashim.app.beans.PostBean;
 import com.alexeimoisseev.bashim.app.db.QuotesDbHelper;
 import org.xmlpull.v1.XmlPullParserException;
 

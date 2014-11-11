@@ -1,6 +1,7 @@
 package com.alexeimoisseev.bashim.app;
 
 import android.text.Html;
+import com.alexeimoisseev.bashim.app.beans.PostBean;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
