@@ -8,7 +8,7 @@
     <bool name="ga_autoActivityTracking">true</bool>
 
     <!-- The screen names that will appear in reports -->
-    <screenName name="com.alexeimoisseev.bashim.app.MainActivity">
+    <screenName name="com.alexeimoisseev.bashim.app.activities.MainActivity">
         Bash.im Main Activity
     </screenName>
     <!--  The following value should be replaced with correct property id. -->

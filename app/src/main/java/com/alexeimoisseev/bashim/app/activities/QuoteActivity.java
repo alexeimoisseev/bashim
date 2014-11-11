@@ -1,4 +1,4 @@
-package com.alexeimoisseev.bashim.app;
+package com.alexeimoisseev.bashim.app.activities;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import com.alexeimoisseev.bashim.app.R;
 import com.alexeimoisseev.bashim.app.share.Share;
 
 
