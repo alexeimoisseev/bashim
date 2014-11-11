@@ -3,7 +3,7 @@ package com.alexeimoisseev.bashim.app;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import com.alexeimoisseev.bashim.app.beans.PostBean;
+import com.alexeimoisseev.bashim.app.beans.QuoteBean;
 import com.alexeimoisseev.bashim.app.db.QuotesDbHelper;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by amois on 04.11.14.
  */
-public class QuotesFetcher extends AsyncTask<String, Integer, List<PostBean>> {
+public class QuotesFetcher extends AsyncTask<String, Integer, List<QuoteBean>> {
     private Context context;
     private Callback callback;
     public QuotesFetcher(Context context, Callback callback) {
@@ -23,8 +23,8 @@ public class QuotesFetcher extends AsyncTask<String, Integer, List<PostBean>> {
     }
 
     @Override
-    protected List<PostBean> doInBackground(String... params) {
-        List<PostBean> items = new ArrayList<PostBean>();
+    protected List<QuoteBean> doInBackground(String... params) {
+        List<QuoteBean> items = new ArrayList<QuoteBean>();
         try {
             items = (new RssParser("http://bash.im/rss/")).fetch();
             Log.i("QuotesFetcher", "Fetched data from http://bash.im/rss/");
@@ -45,7 +45,7 @@ public class QuotesFetcher extends AsyncTask<String, Integer, List<PostBean>> {
     }
 
     @Override
-    protected void onPostExecute(List<PostBean> quotes) {
+    protected void onPostExecute(List<QuoteBean> quotes) {
         super.onPostExecute(quotes);
         QuotesDbHelper hlp = new QuotesDbHelper(context);
         hlp.saveQuotes(quotes);

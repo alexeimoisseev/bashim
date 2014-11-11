@@ -1,7 +1,7 @@
 package com.alexeimoisseev.bashim.app;
 
 import android.text.Html;
-import com.alexeimoisseev.bashim.app.beans.PostBean;
+import com.alexeimoisseev.bashim.app.beans.QuoteBean;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -19,11 +19,11 @@ public class RssParser {
     public RssParser(String url) {
         this.url = url;
     }
-    public List<PostBean> fetch() throws IOException, XmlPullParserException {
-        List<PostBean> items = new ArrayList<PostBean>();
+    public List<QuoteBean> fetch() throws IOException, XmlPullParserException {
+        List<QuoteBean> items = new ArrayList<QuoteBean>();
         XmlPullParser parser = getParser();
         int event = parser.getEventType();
-        PostBean post = new PostBean();
+        QuoteBean quote = new QuoteBean();
 
         boolean insideItem = false;
         while (event != XmlPullParser.END_DOCUMENT) {
@@ -33,19 +33,19 @@ public class RssParser {
                     insideItem = true;
                 } else if (parser.getName().equalsIgnoreCase("link")) {
                     if (insideItem) {
-                        post.setLink(parser.nextText());
+                        quote.setLink(parser.nextText());
                     }
 
                 } else if (parser.getName().equalsIgnoreCase("description")) {
                     if (insideItem) {
-                        post.setDescription(Html.fromHtml(parser.nextText()).toString());
+                        quote.setDescription(Html.fromHtml(parser.nextText()).toString());
                     }
 
                 }
             } else if (event == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("item")) {
                 insideItem = false;
-                items.add(post);
-                post = new PostBean();
+                items.add(quote);
+                quote = new QuoteBean();
             }
 
             event = parser.next(); // move to next element

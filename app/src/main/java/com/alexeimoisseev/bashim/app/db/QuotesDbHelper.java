@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import com.alexeimoisseev.bashim.app.beans.PostBean;
+import com.alexeimoisseev.bashim.app.beans.QuoteBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ public class QuotesDbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public List<PostBean> getSavedQuotes(int offset) {
+    public List<QuoteBean> getSavedQuotes(int offset) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.query(
                 "quotes",
@@ -49,27 +49,27 @@ public class QuotesDbHelper extends SQLiteOpenHelper {
                 null,
                 "id DESC",
                 String.valueOf(offset) + ",10");
-        List<PostBean> res = new ArrayList<PostBean>();
+        List<QuoteBean> res = new ArrayList<QuoteBean>();
         c.moveToFirst();
         while(!c.isAfterLast()) {
-            PostBean post = new PostBean();
-            post.setDescription(c.getString(
+            QuoteBean quote = new QuoteBean();
+            quote.setDescription(c.getString(
                     c.getColumnIndex("quote")
             ));
-            post.setLink(c.getString(
+            quote.setLink(c.getString(
                     c.getColumnIndex("link")
             ));
-            res.add(post);
+            res.add(quote);
             c.moveToNext();
         }
         db.close();
         return  res;
     }
 
-    public void saveQuotes(List<PostBean> quotes) {
+    public void saveQuotes(List<QuoteBean> quotes) {
         SQLiteDatabase db = getWritableDatabase();
 
-        for(PostBean quote: quotes) {
+        for(QuoteBean quote: quotes) {
             ContentValues vals = new ContentValues();
             vals.put("id", quote.getId());
             vals.put("quote", quote.getDescription());

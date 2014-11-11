@@ -3,7 +3,7 @@ package com.alexeimoisseev.bashim.app.beans;
 /**
  * Created by amois on 04.11.14.
  */
-public class PostBean {
+public class QuoteBean {
     private String link;
     private Long id;
     private String description;

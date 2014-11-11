@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import com.alexeimoisseev.bashim.app.beans.PostBean;
+import com.alexeimoisseev.bashim.app.beans.QuoteBean;
 import com.alexeimoisseev.bashim.app.db.QuotesDbHelper;
 
 import java.util.List;
@@ -15,8 +15,8 @@ import java.util.List;
 /**
  * Created by amois on 04.11.14.
  */
-public class QuotesArrayAdapter extends ArrayAdapter<PostBean> {
-    private List<PostBean> quotes;
+public class QuotesArrayAdapter extends ArrayAdapter<QuoteBean> {
+    private List<QuoteBean> quotes;
     private QuotesDbHelper hlp;
     private Context context;
     public QuotesArrayAdapter(Context context) {
@@ -24,7 +24,7 @@ public class QuotesArrayAdapter extends ArrayAdapter<PostBean> {
         this.context = context;
         hlp = new QuotesDbHelper(context);
         quotes = hlp.getSavedQuotes(0);
-        for(PostBean quote: quotes) {
+        for(QuoteBean quote: quotes) {
             add(quote);
             Log.i("Quote", quote.getLink());
         }
@@ -32,29 +32,29 @@ public class QuotesArrayAdapter extends ArrayAdapter<PostBean> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        PostBean post = getItem(position);
+        QuoteBean quote = getItem(position);
         if (convertView == null) {
             convertView = LayoutInflater
                     .from(getContext())
                     .inflate(R.layout.view_post, null);
         }
-        ((TextView) convertView.findViewById(R.id.quote_text)).setText(post.getDescription());
+        ((TextView) convertView.findViewById(R.id.quote_text)).setText(quote.getDescription());
         ((TextView) convertView.findViewById(R.id.id)).setText(context.getString(R.string.quote) +
-                post.getId().toString());
+                quote.getId().toString());
         return convertView;
     }
 
     public void reload() {
         quotes = hlp.getSavedQuotes(0);
         clear();
-        for(PostBean quote: quotes) {
+        for(QuoteBean quote: quotes) {
             add(quote);
         }
     }
 
     public void loadMore(int offset) {
-        List<PostBean> newQuotes = hlp.getSavedQuotes(offset * 10);
-        for(PostBean quote: newQuotes) {
+        List<QuoteBean> newQuotes = hlp.getSavedQuotes(offset * 10);
+        for(QuoteBean quote: newQuotes) {
             add(quote);
         }
 //        notifyDataSetChanged();

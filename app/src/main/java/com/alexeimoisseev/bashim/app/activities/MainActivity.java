@@ -12,7 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.alexeimoisseev.bashim.app.*;
-import com.alexeimoisseev.bashim.app.beans.PostBean;
+import com.alexeimoisseev.bashim.app.beans.QuoteBean;
 import com.alexeimoisseev.bashim.app.db.QuotesDbHelper;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
@@ -61,7 +61,7 @@ public class MainActivity extends ActionBarActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PostBean quote = adapter.getItem(position - 1);
+                QuoteBean quote = adapter.getItem(position - 1);
                 Intent intent = new Intent(that, QuoteActivity.class);
                 intent.putExtra("ID", that.getString(R.string.quote) + quote.getId().toString());
                 intent.putExtra("QUOTE", quote.getDescription());
