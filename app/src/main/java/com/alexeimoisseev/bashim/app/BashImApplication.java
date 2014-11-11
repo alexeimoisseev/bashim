@@ -19,7 +19,7 @@ public class BashImApplication extends Application {
     }
 
     HashMap<TrackerName, Tracker> mTrackers = new HashMap<TrackerName, Tracker>();
-    synchronized Tracker getTracker(TrackerName name) {
+    public synchronized Tracker getTracker(TrackerName name) {
         if(!mTrackers.containsKey(name)) {
             GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
             Tracker t = analytics.newTracker(PROPERTY_ID);
