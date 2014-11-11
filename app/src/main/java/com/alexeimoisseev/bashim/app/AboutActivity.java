@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import com.alexeimoisseev.bashim.app.db.QuotesDbHelper;
 
 
 public class AboutActivity extends ActionBarActivity {
