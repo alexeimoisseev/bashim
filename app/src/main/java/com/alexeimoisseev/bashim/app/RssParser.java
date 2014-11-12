@@ -58,7 +58,7 @@ public class RssParser {
         XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
         factory.setNamespaceAware(true);
         XmlPullParser parser = factory.newPullParser();
-        parser.setInput(_url.openStream(), "CP-1251");
+        parser.setInput(_url.openStream(), "WINDOWS-1251");
         return parser;
     }
 
