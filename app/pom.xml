@@ -12,7 +12,7 @@
         <platform.version> 4.1.1.4
         </platform.version>
         <android.plugin.version>3.9.0-rc.3</android.plugin.version>
-        <android.sdk.path>/Users/amois/android-sdk-macosx</android.sdk.path>
+        <android.sdk.path>${env.ANDROID_HOME}</android.sdk.path>
         <aspectj.version>1.7.4</aspectj.version>
         <allure.version>1.4.4</allure.version>
     </properties>
