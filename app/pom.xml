@@ -13,6 +13,8 @@
         </platform.version>
         <android.plugin.version>3.9.0-rc.3</android.plugin.version>
         <android.sdk.path>/Users/amois/android-sdk-macosx</android.sdk.path>
+        <aspectj.version>1.7.4</aspectj.version>
+        <allure.version>1.4.4</allure.version>
     </properties>
     <!--
     <repositories>
@@ -95,6 +97,12 @@
             <version>2.4</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>ru.yandex.qatools.allure</groupId>
+            <artifactId>allure-junit-adaptor</artifactId>
+            <version>${allure.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -119,10 +127,31 @@
                     </sdk>
                     <androidManifestFile>src/main/AndroidManifest.xml</androidManifestFile>
                     <resourceDirectory>src/main/res</resourceDirectory>
-
-
                 </configuration>
-
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.14</version>
+                <configuration>
+                    <testFailureIgnore>false</testFailureIgnore>
+                    <argLine>
+                        -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
+                    </argLine>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>ru.yandex.qatools.allure.junit.AllureRunListener</value>
+                        </property>
+                    </properties>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
         <testSourceDirectory>src/androidTest/java</testSourceDirectory>
@@ -133,5 +162,16 @@
             </resource>
         </resources>
     </build>
+
+    <reporting>
+        <excludeDefaults>true</excludeDefaults>
+        <plugins>
+            <plugin>
+                <groupId>ru.yandex.qatools.allure</groupId>
+                <artifactId>allure-maven-plugin</artifactId>
+                <version>2.0</version>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>
