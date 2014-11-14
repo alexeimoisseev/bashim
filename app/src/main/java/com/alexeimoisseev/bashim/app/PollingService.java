@@ -28,7 +28,7 @@ public class PollingService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         SharedPreferences prefs = getSharedPreferences("lastModified", 0);
-        Long prevLastModified = prefs.getLong("date", 0);
+        Long prevLastModified = prefs.getLong("date", new Date().getTime());
         PendingIntent intn = PendingIntent.getActivity(
                 this,
                 0,

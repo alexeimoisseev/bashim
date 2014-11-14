@@ -9,6 +9,8 @@ import org.robolectric.annotation.Config;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,5 +30,14 @@ public class RssParserTest {
     public void testNoFetch() throws IOException, XmlPullParserException {
         RssParser parser = new RssParser("http://www.yandex.ru");
         Assert.assertEquals(0, parser.fetch().size());
+    }
+
+    @Test
+    public void testLastDate() throws ParseException, XmlPullParserException, IOException {
+        RssParser parser = new RssParser("http://bash.im/rss/");
+        Date d = parser.lastModified();
+        System.out.println(d);
+        Assert.assertTrue(d.getTime() < new Date().getTime());
+
     }
 }

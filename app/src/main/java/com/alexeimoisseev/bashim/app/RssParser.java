@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by amois on 04.11.14.
@@ -80,7 +81,7 @@ public class RssParser {
                     insideItem = true;
                 } else if (parser.getName().equalsIgnoreCase("pubDate")) {
                     if (insideItem) {
-                        DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss +0400");
+                        DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss Z", Locale.ENGLISH);
                         pubDate = df.parse(parser.nextText().toString());
                     }
                 }
