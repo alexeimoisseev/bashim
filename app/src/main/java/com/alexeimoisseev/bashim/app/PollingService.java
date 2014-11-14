@@ -42,7 +42,7 @@ public class PollingService extends IntentService {
                 prefs.edit().putLong("date", lastModified.getTime());
                 NotificationCompat.Builder builder =
                         new NotificationCompat.Builder(this)
-                                .setSmallIcon(R.drawable.ic_launcher)
+                                .setSmallIcon(R.drawable.notification_icon)
                                 .setContentText(getString(R.string.notification_newquotes))
                                 .setContentTitle(getString(R.string.app_name))
                                 .setAutoCancel(true)
