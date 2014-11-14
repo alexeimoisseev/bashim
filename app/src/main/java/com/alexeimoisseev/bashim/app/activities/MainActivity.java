@@ -1,5 +1,6 @@
 package com.alexeimoisseev.bashim.app.activities;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -76,6 +77,14 @@ public class MainActivity extends ActionBarActivity {
     protected void onStart() {
         super.onStart();
         GoogleAnalytics.getInstance(this).reportActivityStart(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.cancelAll();
     }
 
     @Override
