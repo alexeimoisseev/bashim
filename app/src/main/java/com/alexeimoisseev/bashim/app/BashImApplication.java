@@ -40,7 +40,7 @@ public class BashImApplication extends Application {
         PendingIntent pIntent = PendingIntent.getService(this, 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime(), 1000 * 60 * 60 * 10, pIntent);
+                SystemClock.elapsedRealtime(), 1000 * 60 * 10, pIntent);
 
     }
 }
