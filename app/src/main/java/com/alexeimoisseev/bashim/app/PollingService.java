@@ -27,7 +27,7 @@ public class PollingService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        SharedPreferences prefs = getSharedPreferences("lastModified", 0);
+        SharedPreferences prefs = getSharedPreferences("lastModified", MODE_PRIVATE);
         Long prevLastModified = prefs.getLong("date", new Date().getTime());
         PendingIntent intn = PendingIntent.getActivity(
                 this,
@@ -37,9 +37,16 @@ public class PollingService extends IntentService {
         );
         Log.i("TIMER", "Timer!");
         try {
+            Log.i("TIMER", "Last modified from settings is " + new Date(prevLastModified).toString());
+
             Date lastModified =  parser.lastModified();
+            Log.i("TIMER", "Last modified from rss is " + lastModified);
             if(prevLastModified < lastModified.getTime()) {
-                prefs.edit().putLong("date", lastModified.getTime());
+                Log.i("TIMER", "Saved new time " + lastModified.toString());
+                prefs
+                        .edit()
+                        .putLong("date", lastModified.getTime())
+                        .apply();
                 NotificationCompat.Builder builder =
                         new NotificationCompat.Builder(this)
                                 .setSmallIcon(R.drawable.notification_icon)
