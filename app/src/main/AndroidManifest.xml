@@ -50,10 +50,14 @@
         <activity
             android:name=".activities.ComicsActivity"
             android:label="@string/title_activity_comics"
-            android:parentActivityName="com.alexeimoisseev.bashim.app.activities.MainActivity" >
+            android:parentActivityName=".activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.alexeimoisseev.bashim.app.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.ComicFullScreenActivity"
+            android:label="@string/title_activity_comic_full_screen" >
         </activity>
     </application>
 

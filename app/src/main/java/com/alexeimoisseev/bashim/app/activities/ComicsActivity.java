@@ -1,5 +1,7 @@
 package com.alexeimoisseev.bashim.app.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +22,7 @@ public class ComicsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comics);
         final PullToRefreshListView lv = (PullToRefreshListView) findViewById(R.id.list_comics);
+        final Context that = this;
         adapter = new QuotesArrayAdapter(this, new QuotesDbHelper(this, "comics")) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -57,6 +60,19 @@ public class ComicsActivity extends ActionBarActivity {
         if(adapter.isEmpty()) {
             load(lv);
         }
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                QuoteBean bean = adapter.getItem(position - 1);
+                final String imageUrl = bean.getDescription().replace("<img src=\"", "").replace("\">", "");
+                Bundle bundle = new Bundle();
+                bundle.putString("url", imageUrl);
+
+                Intent fullScreenIntent = new Intent(that, ComicFullScreenActivity.class);
+                fullScreenIntent.putExtras(bundle);
+                startActivityForResult(fullScreenIntent, 0);
+            }
+        });
     }
 
     public void load(final PullToRefreshListView lv) {
