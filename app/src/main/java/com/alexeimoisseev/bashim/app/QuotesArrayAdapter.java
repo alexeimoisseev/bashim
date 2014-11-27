@@ -19,10 +19,10 @@ public class QuotesArrayAdapter extends ArrayAdapter<QuoteBean> {
     private List<QuoteBean> quotes;
     private QuotesDbHelper hlp;
     private Context context;
-    public QuotesArrayAdapter(Context context) {
+    public QuotesArrayAdapter(Context context, QuotesDbHelper hlp) {
         super(context, R.layout.view_post);
         this.context = context;
-        hlp = new QuotesDbHelper(context);
+        this.hlp = hlp;
         quotes = hlp.getSavedQuotes(0);
         for(QuoteBean quote: quotes) {
             add(quote);

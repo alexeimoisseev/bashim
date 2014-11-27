@@ -16,32 +16,34 @@ import java.util.List;
  */
 public class QuotesDbHelper extends SQLiteOpenHelper {
     protected Context context;
-    public QuotesDbHelper(Context context) {
-        super(context, "quotes", null, 1);
-        this.context = context;
+    private String dbName;
+    public QuotesDbHelper(Context context, String name) {
+        super(context, name, null, 1);
+        this.dbName = name;
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE quotes (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, quote TEXT, link TEXT)");
+        db.execSQL("CREATE TABLE " + dbName + " (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, quote TEXT, link TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE quotes");
+        db.execSQL("DROP TABLE " + dbName);
         onCreate(db);
     }
 
     public void clearQuotesTable() {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM quotes");
+        db.execSQL("DELETE FROM " + dbName);
         db.close();
     }
 
     public List<QuoteBean> getSavedQuotes(int offset) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.query(
-                "quotes",
+                dbName,
                 new String[]{"id", "quote", "link"},
                 null,
                 null,
@@ -75,7 +77,7 @@ public class QuotesDbHelper extends SQLiteOpenHelper {
             vals.put("quote", quote.getDescription());
             vals.put("link", quote.getLink());
             try {
-                db.insertOrThrow("quotes", null, vals);
+                db.insertOrThrow(dbName, null, vals);
             } catch (SQLiteConstraintException e) {
                 //this quote already saved. skipping
             }

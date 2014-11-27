@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.alexeimoisseev.bashim.app"
     android:versionCode="4"
-    android:versionName="1.3"
-        >
+    android:versionName="1.3" >
 
     <uses-permission android:name="android.permission.INTERNET" >
     </uses-permission>
@@ -31,7 +30,7 @@
             android:parentActivityName=".activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.alexeimoisseev.bashim.app.MainActivity" />
+                android:value="com.alexeimoisseev.bashim.app.activities.MainActivity" />
         </activity>
         <activity
             android:name=".activities.AboutActivity"
@@ -39,16 +38,23 @@
             android:parentActivityName=".activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.alexeimoisseev.bashim.app.MainActivity" />
+                android:value="com.alexeimoisseev.bashim.app.activities.MainActivity" />
         </activity>
 
         <service
             android:name=".PollingService"
             android:enabled="true"
-            android:exported="false"
-                >
+            android:exported="false" >
         </service>
 
+        <activity
+            android:name=".activities.ComicsActivity"
+            android:label="@string/title_activity_comics"
+            android:parentActivityName="com.alexeimoisseev.bashim.app.activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.alexeimoisseev.bashim.app.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

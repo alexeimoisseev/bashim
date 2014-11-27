@@ -17,17 +17,21 @@ import java.util.List;
 public class QuotesFetcher extends AsyncTask<String, Integer, List<QuoteBean>> {
     private Context context;
     private Callback callback;
-    public QuotesFetcher(Context context, Callback callback) {
+    private String name;
+    private String url;
+    public QuotesFetcher(Context context, String name, String url, Callback callback) {
         this.context = context;
         this.callback = callback;
+        this.name = name;
+        this.url = url;
     }
 
     @Override
     protected List<QuoteBean> doInBackground(String... params) {
         List<QuoteBean> items = new ArrayList<QuoteBean>();
         try {
-            items = (new RssParser("http://bash.im/rss/")).fetch();
-            Log.i("QuotesFetcher", "Fetched data from http://bash.im/rss/");
+            items = (new RssParser(url)).fetch();
+            Log.i("QuotesFetcher", "Fetched data from " + url);
         } catch (IOException e) {
             e.printStackTrace();
             Log.e("RSS FETCH", e.getMessage());
@@ -47,7 +51,7 @@ public class QuotesFetcher extends AsyncTask<String, Integer, List<QuoteBean>> {
     @Override
     protected void onPostExecute(List<QuoteBean> quotes) {
         super.onPostExecute(quotes);
-        QuotesDbHelper hlp = new QuotesDbHelper(context);
+        QuotesDbHelper hlp = new QuotesDbHelper(context, name);
         hlp.saveQuotes(quotes);
         Log.i("QuotesFetcher", "Saved quotes to SQL. callback() now.");
         callback.callback(null);

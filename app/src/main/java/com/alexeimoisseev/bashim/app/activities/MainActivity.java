@@ -39,7 +39,7 @@ public class MainActivity extends ActionBarActivity {
         t.send(new HitBuilders.AppViewBuilder().build());
 
         setContentView(R.layout.activity_main);
-        adapter = new QuotesArrayAdapter(this);
+        adapter = new QuotesArrayAdapter(this, new QuotesDbHelper(this, "quotes"));
         if(adapter.getCount() > 0) {
             findViewById(R.id.progress).setVisibility(View.GONE);
         }
@@ -109,6 +109,9 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_about) {
             Intent about = new Intent(this, AboutActivity.class);
             startActivityForResult(about, 1);
+        } else if (id == R.id.action_comics) {
+            Intent comics = new Intent(this, ComicsActivity.class);
+            startActivityForResult(comics, 1);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -124,7 +127,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void load(final PullToRefreshListView lv) {
-        QuotesFetcher fetcher = new QuotesFetcher(this, new Callback() {
+        QuotesFetcher fetcher = new QuotesFetcher(this, "quotes", "http://bash.im/rss/", new Callback() {
             @Override
             public void callback(Object error) {
                 if(error == null) {
@@ -140,12 +143,12 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void clearDb(View view) {
-        QuotesDbHelper hlp = new QuotesDbHelper(this);
+        QuotesDbHelper hlp = new QuotesDbHelper(this, "quotes");
         hlp.clearQuotesTable();
     }
 
     public void clearCache(MenuItem item) {
-        QuotesDbHelper hlp = new QuotesDbHelper(this);
+        QuotesDbHelper hlp = new QuotesDbHelper(this, "quotes");
         hlp.clearQuotesTable();
     }
 }

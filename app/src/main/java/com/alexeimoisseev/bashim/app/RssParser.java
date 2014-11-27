@@ -44,7 +44,11 @@ public class RssParser {
 
                 } else if (parser.getName().equalsIgnoreCase("description")) {
                     if (insideItem) {
-                        quote.setDescription(Html.fromHtml(parser.nextText()).toString());
+                        if(!url.contains("comics")) {
+                            quote.setDescription(Html.fromHtml(parser.nextText()).toString());
+                        } else {
+                            quote.setDescription(parser.nextText());
+                        }
                     }
 
                 }
