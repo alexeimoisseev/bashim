@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import com.alexeimoisseev.bashim.app.*;
@@ -13,6 +12,9 @@ import com.alexeimoisseev.bashim.app.db.QuotesDbHelper;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ComicsActivity extends ActionBarActivity {
 
@@ -33,9 +35,17 @@ public class ComicsActivity extends ActionBarActivity {
                 }
                 final ImageView img = (ImageView) convertView.findViewById(R.id.comics_image);
                 QuoteBean bean = getItem(position);
-                ((TextView)convertView.findViewById(R.id.comics_text)).setText("По мотивам цитаты #" + bean.getId().toString());
                 final String imageUrl = bean.getDescription().replace("<img src=\"", "").replace("\">", "");
                 UrlImageViewHelper.setUrlDrawable(img, imageUrl, null, 100000000l);
+                //TODO:
+                //тут неправильный номер цитаты выставляется
+                Pattern quotePattern = Pattern.compile("([0-9]+)\\.png");
+                Matcher m = quotePattern.matcher(imageUrl);
+                String id = "0";
+                while(m.find()) {
+                    id = m.group(1);
+                }
+                ((TextView) convertView.findViewById(R.id.comics_text)).setText("По мотивам цитаты #" + id);
 
                 return convertView;
             }
