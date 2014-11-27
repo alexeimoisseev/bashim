@@ -21,7 +21,7 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 public class TestQuotesDbHelper {
 
-    QuotesDbHelper helper = new QuotesDbHelper(new MainActivity());
+    QuotesDbHelper helper = new QuotesDbHelper(new MainActivity(), "quotes");
 
 
     @Test

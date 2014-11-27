@@ -19,6 +19,6 @@
     <string name="link_to_github">Исходный код приложения: <a href="https://github.com/alexeimoisseev/bashim">github.com/alexeimoisseev/bashim</a></string>
     <string name="notification_newquotes">Доступны новые цитаты</string>
     <string name="title_activity_comics">Комиксы</string>
-    <string name="title_activity_comic_full_screen">ComicFullScreenActivity</string>
+    <string name="title_activity_comic_full_screen">Комикс</string>
 
 </resources>
