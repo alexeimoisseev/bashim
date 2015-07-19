@@ -15,13 +15,18 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="14dp"
+
         android:layout_weight="10"
             />
-    <Button
-            android:layout_width="fill_parent"
-            android:layout_height="10dp"
-            android:layout_weight="1"
-            android:onClick="share"
-            android:text="@string/share"
-            />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="share"
+        android:clickable="true"
+        android:src="@android:drawable/ic_menu_share"
+        android:layout_gravity="right|bottom|end"
+        >
+
+    </android.support.design.widget.FloatingActionButton>
 </LinearLayout>

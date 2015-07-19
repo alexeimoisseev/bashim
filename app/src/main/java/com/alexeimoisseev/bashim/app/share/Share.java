@@ -13,7 +13,7 @@ public class Share {
         String postText = text;
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, String.format("%s %s", postText, link));
+        intent.putExtra(Intent.EXTRA_TEXT, String.format("%s %s via https://vk.com/bashorgruclub", postText, link));
         context.startActivity(intent);
 
     }

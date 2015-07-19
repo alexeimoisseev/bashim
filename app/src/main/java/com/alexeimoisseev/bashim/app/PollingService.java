@@ -7,6 +7,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.RingtoneManager;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -53,11 +54,18 @@ public class PollingService extends IntentService {
                                 .setContentText(getString(R.string.notification_newquotes))
                                 .setContentTitle(getString(R.string.app_name))
                                 .setAutoCancel(true)
+                                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                                 .setContentIntent(intn);
                 NotificationManager mNotificationManager =
                         (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 mNotificationManager.notify(1, builder.build());
+            } else {
+                prefs
+                        .edit()
+                        .putLong("date", new Date().getTime())
+                        .apply();
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (XmlPullParserException e) {
