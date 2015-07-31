@@ -3,8 +3,9 @@ package com.alexeimoisseev.bashim.app.activities;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,11 +20,9 @@ import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Logger;
 import com.google.android.gms.analytics.Tracker;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     private QuotesArrayAdapter adapter;
     final Context that = this;
@@ -40,16 +39,17 @@ public class MainActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_main);
         adapter = new QuotesArrayAdapter(this, new QuotesDbHelper(this, "quotes"));
-        if(adapter.getCount() > 0) {
-            findViewById(R.id.progress).setVisibility(View.GONE);
-        }
-        final PullToRefreshListView lv = (PullToRefreshListView) findViewById(R.id.list_view);
-        lv.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+        final ListView lv = (ListView) findViewById(R.id.list_view);
+        final SwipeRefreshLayout swipe = (SwipeRefreshLayout) findViewById(R.id.activity_main_swipe);
+        swipe.setColorSchemeResources(R.color.orange, R.color.blue, R.color.green);
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh(PullToRefreshBase<ListView> listViewPullToRefreshBase) {
-                load(lv);
+            public void onRefresh() {
+                swipe.setRefreshing(true);
+                load(swipe);
             }
         });
+
         lv.setOnScrollListener(new EndlessScrollListener() {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
@@ -57,12 +57,13 @@ public class MainActivity extends ActionBarActivity {
                 adapter.loadMore(page);
             }
         });
+        swipe.setRefreshing(true);
+        load(swipe);
         lv.setAdapter(adapter);
-        lv.setRefreshing(true);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                QuoteBean quote = adapter.getItem(position - 1);
+                QuoteBean quote = adapter.getItem(position);
                 Intent intent = new Intent(that, QuoteActivity.class);
                 intent.putExtra("ID", that.getString(R.string.quote) + quote.getId().toString());
                 intent.putExtra("QUOTE", quote.getDescription());
@@ -126,7 +127,7 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    public void load(final PullToRefreshListView lv) {
+    public void load(final SwipeRefreshLayout swipe) {
         QuotesFetcher fetcher = new QuotesFetcher(this, "quotes", "http://bash.im/rss/", new Callback() {
             @Override
             public void callback(Object error) {
@@ -135,8 +136,7 @@ public class MainActivity extends ActionBarActivity {
                 } else {
                     Toast.makeText(getBaseContext(), error.toString(), Toast.LENGTH_SHORT).show();
                 }
-                lv.onRefreshComplete();
-                findViewById(R.id.progress).setVisibility(View.GONE);
+                swipe.setRefreshing(false);
             }
         });
         fetcher.execute();

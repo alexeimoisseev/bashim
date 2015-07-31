@@ -2,7 +2,36 @@
 <resources>
 
     <string name="app_name">Bash.im</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+        Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!
+    </string>
     <string name="action_settings">Settings</string>
     <string name="loadmore">Загрузить</string>
     <string name="clear">Очистить БД</string>

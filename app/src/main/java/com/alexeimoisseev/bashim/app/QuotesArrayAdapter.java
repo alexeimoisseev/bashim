@@ -10,6 +10,10 @@ import android.widget.TextView;
 import com.alexeimoisseev.bashim.app.beans.QuoteBean;
 import com.alexeimoisseev.bashim.app.db.QuotesDbHelper;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,14 +37,24 @@ public class QuotesArrayAdapter extends ArrayAdapter<QuoteBean> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         QuoteBean quote = getItem(position);
+
         if (convertView == null) {
             convertView = LayoutInflater
                     .from(getContext())
                     .inflate(R.layout.view_post, null);
         }
         ((TextView) convertView.findViewById(R.id.quote_text)).setText(quote.getDescription());
-        ((TextView) convertView.findViewById(R.id.id)).setText(context.getString(R.string.quote) +
-                quote.getId().toString());
+        ((TextView) convertView.findViewById(R.id.id)).setText(context.getString(R.string.quote) + quote.getId().toString());
+        PrettyTime pt = new PrettyTime(context.getResources().getConfiguration().locale);
+        String prettyTime = pt.format(quote.getDate());
+
+        if(quote.getDate().getTime() < 1000) {
+            prettyTime = "давно";
+        } else if ((new Date()).getTime() - quote.getDate().getTime() > 60 * 60 * 24 * 1000) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM, kk:mm:ss");
+            prettyTime = sdf.format(quote.getDate());
+        }
+        ((TextView) convertView.findViewById(R.id.quote_date)).setText(prettyTime/* + " (" + quote.getDate() + ")"*/);
         return convertView;
     }
 

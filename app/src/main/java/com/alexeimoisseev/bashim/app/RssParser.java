@@ -51,6 +51,15 @@ public class RssParser {
                         }
                     }
 
+                } else if (parser.getName().equalsIgnoreCase("pubDate")) {
+                    if(insideItem) {
+                        try {
+                            quote.setDate(parser.nextText());
+                            Log.i("Date", "date is " + quote.getDate().toString());
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             } else if (event == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("item")) {
                 insideItem = false;

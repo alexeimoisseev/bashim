@@ -18,20 +18,22 @@ public class QuotesDbHelper extends SQLiteOpenHelper {
     protected Context context;
     private String dbName;
     public QuotesDbHelper(Context context, String name) {
-        super(context, name, null, 1);
+        super(context, name, null, 2);
         this.dbName = name;
     }
 
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + dbName + " (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, quote TEXT, link TEXT)");
+        db.execSQL("CREATE TABLE " + dbName + " (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, quote TEXT, link TEXT, date INTEGER)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE " + dbName);
-        onCreate(db);
+        if(newVersion > oldVersion) {
+            db.execSQL("ALTER TABLE " + dbName + " ADD COLUMN date INTEGER");
+        }
+
     }
 
     public void clearQuotesTable() {
@@ -44,7 +46,7 @@ public class QuotesDbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.query(
                 dbName,
-                new String[]{"id", "quote", "link"},
+                new String[]{"id", "quote", "link", "date"},
                 null,
                 null,
                 null,
@@ -61,6 +63,10 @@ public class QuotesDbHelper extends SQLiteOpenHelper {
             quote.setLink(c.getString(
                     c.getColumnIndex("link")
             ));
+
+            quote.setDate(c.getLong(
+                    c.getColumnIndex("date")
+            ));
             res.add(quote);
             c.moveToNext();
         }
@@ -76,6 +82,7 @@ public class QuotesDbHelper extends SQLiteOpenHelper {
             vals.put("id", quote.getId());
             vals.put("quote", quote.getDescription());
             vals.put("link", quote.getLink());
+            vals.put("date", quote.getDate().getTime());
             try {
                 db.insertOrThrow(dbName, null, vals);
             } catch (SQLiteConstraintException e) {
