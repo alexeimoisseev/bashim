@@ -42,7 +42,7 @@
     <string name="title_activity_quote">Цитата</string>
     <string name="share">Поделиться</string>
     <string name="author">Автор: Алексей Моисеев</string>
-    <string name="version">Версия: 1.4 от 27 ноября 2014 года</string>
+    <string name="version">Версия: 1.5 от 31 июля 2015 года</string>
     <string name="link_to_club"><a href="https://vk.com/bashorgruclub">vk.com/bashorgruclub</a></string>
     <string name="action_about">О приложении</string>
     <string name="link_to_github">Исходный код приложения: <a href="https://github.com/alexeimoisseev/bashim">github.com/alexeimoisseev/bashim</a></string>
